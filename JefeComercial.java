@@ -21,6 +21,11 @@ public class JefeComercial extends Empleado{
         this.plus = plus;
     }
 
+
+    public void buscarJefeComercial(){
+        
+    }
+
     @Override
     public String toString() {
         return "JefeComercial [plus=" + plus + "]";

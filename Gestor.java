@@ -56,6 +56,45 @@ public class Gestor {
                     // TODO: luego explicamos el casteo 
                     ((Comercial) e).listarVentasPorFecha(fecha);     
             }
+
+            else if(salir == false){
+                System.out.println(
+                    "¿Quieres añadir un jefe comercial o un comercial? [j/c]");
+                char opt = Util.readChar('j', 'c');
+
+                if(opt == 'j'){
+                    System.out.println(
+                        "¿De qué sector es el jefe comercial?");
+                    String sector = Util.readText();
+                    try {
+                        fis = new FileInputStream(f);
+                        ois = new ObjectInputStream(fis);
+                        longitud = Util.fileLength(f);
+                        
+                        for (int i = 0; i < longitud && salir == false; i++) {
+                            e = (Empleado) ois.readObject();
+                            if (e.getSector().equalsIgnoreCase(sector) && e instanceof JefeComercial){
+                                    salir = true;
+                            }
+                        }
+                    } catch (Exception ex){
+                        System.out.println("Ha habido un problema, tio. No se ha podido encontrar.");
+                    }
+        
+                    try {
+                        ois.close();
+                        fis.close();
+                    }
+                    catch (IOException ioe) {
+                        System.out.println("Ha habido un problema cerrando los flujos.");
+                    }
+                  if(salir == true){
+                      System.out.println("");
+                  }
+                  else
+                    System.out.println();
+                }
+            }
         
         }
     }
